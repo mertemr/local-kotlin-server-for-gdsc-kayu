@@ -1,0 +1,48 @@
+services:
+    web:
+        build: .
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/code
+        environment:
+            - CONN=pyserver
+            - CONN_PORT=8002
+            - PORT=8000
+        expose:
+          - "8000"
+        networks:
+            - localarea
+        depends_on:
+            - pyserver
+
+    pyserver:
+        build: ./api
+        ports:
+            - "8002:8002"
+        expose:
+          - "8002"
+        networks:
+            - localarea
+        depends_on:
+            - kotlin_server
+        environment:
+            - HOST=pyserver
+            - PORT=8002
+            # - NETWORK=kotlin_server
+            - SPRING_API_PORT=8080
+
+    kotlin_server:
+        image: prendota/kotlin-compiler-server
+        ports:
+            - "8080:8080"
+        environment:
+            - ACCESS_CONTROL_ALLOW_ORIGIN_VALUE=*
+        expose:
+            - "8080"
+        networks:
+            - localarea
+
+networks:
+    localarea:
+        driver: bridge
