@@ -74,9 +74,11 @@ function toggleDarkMode() {
   if (darkEnabled) {
     $("#darkmode").html(moon);
     $("html").attr("data-bs-theme", "light");
+    $("body > footer > svg").css("fill", "black");
   } else {
     $("#darkmode").html(sun);
     $("html").attr("data-bs-theme", "dark");
+    $("body > footer > svg").css("fill", "white");
   }
 }
 
