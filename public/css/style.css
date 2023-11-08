@@ -1,21 +1,41 @@
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/FiraCodeNerdFont-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
+    font: 16px/1.5;
     background-color: #f5f5f5;
 }
 
 textarea {
-    resize: vertical;
-    font: 14px 'Fira Code', monospace;
+  font-family: "Fira Code", monospace !important;
+  resize: vertical;
 }
 
 .container {
     width: 100%;
     margin: 0 auto;
+}
+
+#output > div > p {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 /* https://loading.io/css/ <3 */
