@@ -44,13 +44,13 @@ function runCode() {
             $("#output").empty();
             if (data.error) {
                 $("#output")
-                .append(`<div class="alert alert-danger" role="alert">
+                .append(`<div class="alert alert-danger p-0" role="alert">
                 <p>${data.error}</p>
                 </div>`);
                 codeStatus.html(xmark);
             } else {
                 $("#output")
-                .append(`<div class="alert alert-success" role="alert">
+                .append(`<div class="alert alert-success p-0" role="alert">
                 <p>${data.message}</p>
                 </div>`);
                 let timeDiff = new Date().getTime() - startTime;
