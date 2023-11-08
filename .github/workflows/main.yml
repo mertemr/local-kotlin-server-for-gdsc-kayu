@@ -1,9 +1,20 @@
-name: Test
-  - uses: actions/checkout@v3
-  - uses: isbang/compose-action@v1.5.1
-    with:
-      compose-file: "./docker/docker-compose.yml"
-      down-flags: "--volumes"
-      services: |
-        web
-        kotlin_server
+name: Compose Action
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Start Compose services
+      uses: isbang/compose-action@v1.5.1
+      with:
+        compose-file: "./docker/docker-compose.yml"
+        down-flags: "-v"
+        services: |
+          web
+          kotlin_server
