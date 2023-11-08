@@ -93,29 +93,4 @@ $("#darkmode_btn").click(() => {
     toggleDarkMode();
 });
 
-codeEditor.on("keydown", (e) => {
-    if (e.key === 'Tab' && e.shiftKey) {
-        e.preventDefault();
-
-        const cursorPosition = codeEditor[0].selectionStart;
-        const text = codeEditor.val();
-
-        if (text.substring(cursorPosition - 2, cursorPosition) === '  ' && cursorPosition >= 2) {
-            codeEditor.val(text.substring(0, cursorPosition - 2) + text.substring(cursorPosition));
-            codeEditor[0].setSelectionRange(cursorPosition - 2, cursorPosition - 2);
-        }
-    } else if (e.key === "Tab") {
-        e.preventDefault();
-        let start = codeEditor[0].selectionStart;
-        let end = codeEditor[0].selectionEnd;
-
-        codeEditor.val(
-            codeEditor.val().substring(0, start) +
-                "  " + codeEditor.val().substring(end)
-        );
-
-        codeEditor[0].selectionStart = codeEditor[0].selectionEnd = start + 2;
-    }
-});
-
 toggleDarkMode();
