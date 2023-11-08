@@ -66,31 +66,32 @@ codeEditor.text(`fun main() {
   println("Hello, World!")
 }`);
 
-let darkEnabled;
-if (localStorage.getItem("darkmode") === null) {
+let darkEnabled = JSON.parse(localStorage.getItem("darkmode"));
+
+if (darkEnabled === null) {
     localStorage.setItem("darkmode", true);
     darkEnabled = true;
 }
 
 function toggleDarkMode() {
     if (darkEnabled) {
-        localStorage.setItem("darkmode", false);
         $("#darkmode").html(moon);
         $("html").attr("data-bs-theme", "light");
     } else {
-        localStorage.setItem("darkmode", true);
         $("#darkmode").html(sun);
         $("html").attr("data-bs-theme", "dark");
     }
 }
 
-runButton.click(() => {
-    runCode();
-});
-
 $("#darkmode_btn").click(() => {
     darkEnabled = !darkEnabled;
+    if (darkEnabled) localStorage.setItem("darkmode", true);
+    else localStorage.setItem("darkmode", false);
     toggleDarkMode();
 });
 
 toggleDarkMode();
+
+runButton.click(() => {
+    runCode();
+});
