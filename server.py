@@ -62,11 +62,13 @@ def create_traceback(error_dict: dict) -> str:
 
     return f"{severity} at line {start.get('line')}, column {start.get('ch')}-{end.get('ch')}: {message}"
 
+
 def create_exception(exception: dict) -> str:
     full_name = exception.get("fullName")
     method = exception.get("stackTrace")[0].get("methodName")
     line = exception.get("stackTrace")[0].get("lineNumber")
     return f"Exception {full_name} at {method} line {line}"
+
 
 @app.route("/js/<path:path>", methods=["GET"])
 def js(path: str):
@@ -104,7 +106,7 @@ def compiler_run():
         return jsonify(out)
 
     print(out)
-    
+
     errors: dict = out.get("errors")
     if (error := list(errors.values())[0]) != []:  # kotlin errors
         error_message = create_traceback(error[0])
