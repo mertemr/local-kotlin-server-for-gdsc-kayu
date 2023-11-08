@@ -6,31 +6,17 @@ services:
         volumes:
             - .:/code
         environment:
+            - PORT=8000
             - CONN=pyserver
             - CONN_PORT=8002
-            - PORT=8000
+            - SPRING_API_PORT=8080
+            - NETWORK=kotlin_server
         expose:
           - "8000"
         networks:
             - localarea
         depends_on:
-            - pyserver
-
-    pyserver:
-        build: ./api
-        ports:
-            - "8002:8002"
-        expose:
-          - "8002"
-        networks:
-            - localarea
-        depends_on:
             - kotlin_server
-        environment:
-            - HOST=pyserver
-            - PORT=8002
-            # - NETWORK=kotlin_server
-            - SPRING_API_PORT=8080
 
     kotlin_server:
         image: prendota/kotlin-compiler-server

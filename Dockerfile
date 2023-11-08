@@ -1,11 +1,11 @@
-FROM node:slim
+FROM python:3.10-slim-bullseye
 
 WORKDIR /app
 
-COPY package.json /app
+COPY requirements.txt requirements.txt
 
-RUN npm install
+RUN pip3 install -r requirements.txt
 
-COPY . /app
+COPY . .
 
-CMD ["npm", "start"]
+CMD ["python3", "binder.py"]
