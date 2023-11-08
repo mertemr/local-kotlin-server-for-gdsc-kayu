@@ -78,6 +78,11 @@ def css(path: str):
     return send_from_directory("public/css", path)
 
 
+@app.route("/fonts/<path:path>", methods=["GET"])
+def fonts(path: str):
+    return send_from_directory("public/fonts", path)
+
+
 @app.route("/api/version", methods=["GET"])
 def api_version():
     return jsonify(get("versions"))
