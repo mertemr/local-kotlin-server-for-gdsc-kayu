@@ -1,3 +1,5 @@
+version: "3"
+
 services:
     web:
         build: .
@@ -6,11 +8,10 @@ services:
         volumes:
             - .:/code
         environment:
+            - HOST=web
             - PORT=8000
-            - CONN=pyserver
-            - CONN_PORT=8002
             - SPRING_API_PORT=8080
-            - NETWORK=kotlin_server
+            - NETWORK=localarea
         expose:
           - "8000"
         networks:
@@ -22,12 +23,14 @@ services:
         image: prendota/kotlin-compiler-server
         ports:
             - "8080:8080"
-        environment:
-            - ACCESS_CONTROL_ALLOW_ORIGIN_VALUE=*
         expose:
             - "8080"
+        environment:
+            - ACCESS_CONTROL_ALLOW_ORIGIN_VALUE=*
         networks:
-            - localarea
+            localarea:
+                aliases:
+                    - localarea
 
 networks:
     localarea:

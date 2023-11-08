@@ -1,7 +1,9 @@
+import os
 import server
+import waitress
 
-HOST = server.os.getenv("HOST", "localhost")
-PORT = server.os.getenv("PORT", "8002")
+HOST = os.getenv("HOST", "localhost")
+PORT = os.getenv("PORT", "8002")
 
 if __name__ == "__main__":
-    server.app.run(host=HOST, port=PORT, debug=True)
+    waitress.serve(server.app, host=HOST, port=PORT, threads=4)
